@@ -29,12 +29,12 @@ if(isset($_POST['submit2'])){
     $phonenumber = $_POST['phonenumber'];
     $email = $_POST['email'];
     $passwordr = $_POST['passwordr'];
-    $conn->query("SELECT * from user WHERE username = '$name';");
-    if(mysqli_affected_rows($conn) > 0){
+    $stmt = $conn->connect()->query("SELECT * from user WHERE username = '$name';");
+    if($stmt->rowCount() > 0){
         echo "username already exist";
     }else{
         $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
-        $conn->query("INSERT INTO user VALUES('$name', '$phonenumber', '$email', '$hashedpassword');");
+        $conn->connect()->query("INSERT INTO user VALUES('$name', '$phonenumber', '$email', '$hashedpassword');");
     }
 }
 ?>
