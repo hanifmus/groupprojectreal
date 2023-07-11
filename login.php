@@ -63,6 +63,35 @@ if(isset($_POST['submit2'])){
             header("location: adindex.html");
         }
     }
+
+
+    if(isset($_POST['sign in'])){
+        $name = $_POST['username'];
+        $password = $_POST['password'];
+        $type = $_POST['type'];
+        if($type == 'customer'){
+            $SIstmt = $conn->connect()->prepare("SELECT * FROM customer WHERE username = :username");
+            $SIstmt->bindParam(":username",$name);
+            $SIstmt->execute();
+            $userdata = $SIstmt->fetch();
+            if($SIstmt->rowCount() > 0){
+                if(password_verify($password,$userdata['password'])){
+                    $_SESSION['username'] = $userdata['username'];
+                    header("location: booking.php");
+                }else{
+                    echo "
+                    alert('Incorrect Password')
+                ";
+                }
+            }else{
+                echo "
+                    alert('Invalid Username')
+                ";
+            }
+        }   
+      
+
+    }
 ?>
 
 
@@ -101,12 +130,10 @@ if(isset($_POST['submit2'])){
             <div class="content">
                 <h3 class="logo">ATLANTIC</h3>
 
-
                 <div class="text-sci">
                     <h2>Welcome! <br> <span>To Our Staff </span> </h2>
 
                     <p> Welcome back, staff members! Please enter your credentials to access the login page and continue your productive journey</p>
-
                     <div class="social-icon">
                         <a href="#"></a>
                         <a href="#"></a>
@@ -139,8 +166,11 @@ if(isset($_POST['submit2'])){
                         </label>
                         <a href="#">Forgot Password</a>
                     </div>
-
-                    <button type="submit" class="btn" value="submit" name="submit">Sign In</button>
+                    <div class="radio-grp">
+                        <label for="staff"><input type="radio" name="type" id="staff" value="staff">Staff</label>
+                        <label for="customer"><input type="radio" name="type" id="customer" value="customer">Customer</label>
+                    </div>
+                    <button type="submit" class="btn" value="submit" name="sign in">Sign In</button>
 
                     <div class="login-register">
                         <p>Don't have any account? <a href="#" class="register-link">Sign Up</a></p>
@@ -155,7 +185,7 @@ if(isset($_POST['submit2'])){
 
                     <div class="Input-box">
                         <span class="icon"><i class='bx bx-user-circle' ></i></i></span>
-                        <input type="text" name="usernamer" placeholder="usernamer">
+                        <input type="text" name="usernamer" placeholder="username">
                          <label>Username</label>
                     </div>  
 
@@ -174,7 +204,7 @@ if(isset($_POST['submit2'])){
 
                     <div class="Input-box">
                         <span class="icon"><i class='bx bx-lock-alt' ></i></span>
-                        <input type="password" name="passwordr" placeholder="passwordr">
+                        <input type="password" name="passwordr" placeholder="password">
                         <label>Password</label>
                     </div>
 
@@ -184,7 +214,7 @@ if(isset($_POST['submit2'])){
                         </label>
                     </div>
 
-                    <button type="submit" class="btn" value="submit" name="submit2" >Sign In</button>
+                    <button type="submit" class="btn" value="submit" name="sign in" >Sign Up</button>
 
                     <div class="login-register">
                         <p>Already have an account <a href="#" class="login-link">Sign In</a></p>
