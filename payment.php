@@ -6,12 +6,20 @@ require 'config.php';
    session_start();
 
    $user_id = $_SESSION['id'];
+   if(isset($_POST['submit'])){
+      $fullname = $_POST['fullname'];
+      $email = $_POST['email'];
+      $checkinDate = $_POST['checkinDate'];
+      $checkoutDate = $_POST['checkoutDate'];
 
-   $fullname = $_POST['fullname'];
-   $email = $_POST['email'];
-   $checkinDate = $_POST['checkinDate'];
-   $checkoutDate = $_POST['checkoutDate'];
+      $adultqty = $_POST['adultqty'];
+      $childqry = $_POST['childqty'];
+      $roomno = $_POST['roomno'];
+      $request = $_POST['request'];
 
+   }
+
+   
     /* $conn = new Dbh();
     $cstmt = $conn->connect()->prepare("SELECT * from user WHERE username = :username");
     $cstmt->bindparam(":username", $username);
