@@ -153,7 +153,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <select class="form-select">
+                                    <select name="adult" class="form-select">
                                         <option selected>Adult</option>
                                         <option value="1">Adult 1</option>
                                         <option value="2">Adult 2</option>
@@ -161,7 +161,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <select class="form-select">
+                                    <select name="child" class="form-select">
                                         <option selected>Child</option>
                                         <option value="1">Child 1</option>
                                         <option value="2">Child 2</option>

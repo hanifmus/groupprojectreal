@@ -3,8 +3,14 @@ session_start();
 
 require 'config.php';
     
-   
+   session_start();
 
+   $user_id = $_SESSION['id'];
+
+   $fullname = $_POST['fullname'];
+   $email = $_POST['email'];
+   $checkinDate = $_POST['checkinDate'];
+   $checkoutDate = $_POST['checkoutDate'];
 
     /* $conn = new Dbh();
     $cstmt = $conn->connect()->prepare("SELECT * from user WHERE username = :username");
