@@ -1,7 +1,7 @@
 <?php
 
 
-  session_start();
+  /*session_start();
 
 
   require_once 'config.php';
@@ -27,6 +27,7 @@
             header("location: adindex.html");
         }
     }
+    */
 ?>
 
 <!DOCTYPE html>
@@ -205,7 +206,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="wow fadeInUp" data-wow-delay="0.2s">
-                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                            <form action="payment.php" method="post">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating" >
@@ -219,19 +220,20 @@
                                             <label for="email">Your Email</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 mb-3">
                                         <div class="form-floating date" name="checkin" data-target-input="nearest" >
-                                            <input type="text" class="form-control datetimepicker-input" name="checkin" placeholder="Check In" data-target="#date3" data-toggle="datetimepicker" />
-                                            <label for="checkin">Check In</label>
+                                            <label style="margin:1em;" for="checkin">Check In date</label>
+                                            <input type="date" name="checkinDate" id="checkin">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 mb-3">
                                         <div class="form-floating date" name="checkout" data-target-input="nearest" >
-                                            <input type="text" class="form-control datetimepicker-input" name="checkout" placeholder="Check Out" data-target="#date4" data-toggle="datetimepicker" />
-                                            <label for="checkout">Check Out</label>
+                                            <label style="margin:1em;" for="checkout">Check Out Date</label>
+                                            <input type="date" name="checkoutDate" id="checkout">
+                                           
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 mt-4">
                                         <div class="form-floating">
                                             <select class="form-select" name="adultqty" >
                                               <option value="1">Adult 1</option>
@@ -241,7 +243,7 @@
                                             <label for="select1">Select Adult</label>
                                           </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 mt-4">
                                         <div class="form-floating" >
                                             <select class="form-select" name="childqty" >
                                               <option value="1">Child 1</option>

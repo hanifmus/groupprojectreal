@@ -3,24 +3,7 @@ session_start();
 
 require 'config.php';
     
-    //customer
-    $username = $_SESSION['username'];
-    $phonenumber = $_SESSION['phonenumber'];
-    $email = $_SESSION['email'];
-
-    //room
-    $roomno = $_SESSION['roomno'];
-    $roomsize = $_SESSION['roomsize'];
-    $roomprice = $_SESSION['roomprice'];
-    $roompic = $_SESSION['roompic'];
-
-    //payment
-    $paymentid = $_SESSION['paymentid'];
-    $name = $_SESSION['name'];
-    $username = $_SESSION['paymentid'];
-    $paymentid = $_SESSION['paymentid'];
-    $paymentid = $_SESSION['paymentid'];
-    $paymentid = $_SESSION['paymentid'];
+   
 
 
     /* $conn = new Dbh();
