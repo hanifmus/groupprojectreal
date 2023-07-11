@@ -2,11 +2,13 @@
 session_start();
 
 require 'config.php';
+require_once 'functions.php';
     
    session_start();
 
    $user_id = $_SESSION['id'];
    if(isset($_POST['submit'])){
+      $username = $_SESSION['username'];
       $fullname = $_POST['fullname'];
       $email = $_POST['email'];
       $checkinDate = $_POST['checkinDate'];
@@ -17,6 +19,18 @@ require 'config.php';
       $roomno = $_POST['roomno'];
       $request = $_POST['request'];
 
+      $conn = new Dbh();
+      $userstmt = $conn->connect()->query("SELECT * FROM customer WHERE username = '$username'");
+      $userdata = $userstmt->fetch();
+
+      $paystmt = $conn->connect()->query("SELECT * FROM payment WHERE username = '$username'");
+      $paydata = $paystmt->fetch();
+
+      $days = Functions::calcDays($checkinDate,$checkoutDate);
+      $totalpayment = Functions::calcPrice($days,$roomno);
+
+      $roomstmt = $conn->connect()->query("SELECT * FROM room WHERE roomno = '$roomno'");
+      $roomdata = $roomstmt->fetch();
    }
 
    
@@ -141,25 +155,25 @@ require 'config.php';
       <img src="product-image.jpg" alt="Product Image" width="200">
     </div>
     <div class="product-details">
-      <h2>Product Details</h2>
-      <p>Product: Example Product</p>
-      <p>Price: $19.99</p>
-      <p>Quantity: 1</p>
+      <h2>Room Details</h2>
+      <p>Room Name: <?= $roomdata['name']?></p>
+      <p>Room Number : <?= $roomdata['roomno']?></p>
+      <p>Price : <?= $roomdata['price']?></p>
     </div>
     <div class="customer-details">
       <h2>Customer Details</h2>
-      <p>Name: John Doe</p>
-      <p>Email: johndoe@example.com</p>
-      <p>Address: 123 Main Street, City, Country</p>
+      <p>Name: <?= $userdata['fullname'];?></p>
+      <p>Email: <?= $userdata['email'];?></p>
+      <p>Phone: <?= $userdata['phonenumber'];?></p>
     </div>
     <div class="payment-details">
       <h2>Payment Details</h2>
       <p>Payment Method: Credit Card</p>
-      <p>Card Number: **** **** **** 1234</p>
-      <p>Expiration Date: 12/24</p>
+      <p>Card Number: <?= $paydata['cardno']?></p>
+      <p>Expiration Date: <?=$paydata['carddate']?></p>
     </div>
-    <p class="payment-amount">Total Payment: $19.99</p>
-    <button class="confirmation-button">Confirm Payment</button>
+    <p class="payment-amount">Total Payment: <?=$totalpayment?></p>
+    <input type="pay" class="confirmation-button">Confirm Payment</input>
   </div>
 </body>
 </html>

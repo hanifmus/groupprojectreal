@@ -13,8 +13,6 @@ if(isset($_POST['submit'])){
         $user = $stmt->fetch();
         if(password_verify($password, $user['password'])){
             $_SESSION['username'] = $user['username'];
-            $_SESSION['password'] = $user['password'];
-            
             header("location: CustomerPAge.html");
         }
         else
