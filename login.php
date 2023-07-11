@@ -14,6 +14,7 @@ if(isset($_POST['submit'])){
         if(password_verify($password, $user['password'])){
             $_SESSION['username'] = $user['username'];
             $_SESSION['password'] = $user['password'];
+            
             header("location: CustomerPAge.html");
         }
         else
