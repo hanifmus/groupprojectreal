@@ -39,6 +39,32 @@ if(isset($_POST['submit2'])){
 }
 ?>
 
+<?php
+
+
+  session_start();
+
+
+  require_once 'config.php';
+    if(isset($_POST['submit'])){
+        $name = $_POST['usernamer'];
+    $phonenumber = $_POST['phonenumber'];
+    $email = $_POST['email'];
+    $passwordr = $_POST['passwordr'];
+        $conn = new Dbh();
+        $stmt = $conn->connect()->prepare("SELECT * from custorder WHERE roomno = :roomno");
+        $stmt->bindparam(":roomno",$roomno);
+        $stmt->execute();
+        if($stmt->rowcount() > 0){
+            echo "The room is already been booked";
+        }else{
+            
+            $stmt = $conn->insert()->prepare("INSERT INTO custorder (roomno, fullname, email, checkin, checkout, adultqty, childqty, request) VALUES(?,?,?,?,?,?,?,?)")->execute([$roomno, $fullname, $email, $checkin, $checkout, $adultqty, $childqty, $request]);
+            
+            header("location: adindex.html");
+        }
+    }
+?>
 
 
 <!DOCTYPE html>
